@@ -2,83 +2,94 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
-<body>
-    <header>
-      <div class="logo"></div>
-    </header>
+<body class="page">
+  <header class="header">
+    <img class="logo" src="./images/icons/logo.svg" alt="лого">
+  </header>
 
-    <main>
-      <section class="profile">
-        <img class="" src="./images/avatar.jpeg" alt="аватар">
-        <div>
-          <h1>Nikita</h1>
-          <p>Front-End developer</p>
-          <button></button>
+  <main class="main">
+    <section class="profile">
+      <img class="profile__avatar" src="./images/avatar/avatar.jpeg" alt="аватар">
+      <div class="profile__info">
+        <h1 class="profile__name">Nikita</h1>
+        <p class="profile__description">Front-End developer</p>
+        <button class="button profile__button profile__button_act_edit" type="button"></button>
+      </div>
+      <button class="button profile__button profile__button_act_add" type="button"></button>
+    </section>
+
+    <section class="elements">
+      <div class="element">
+        <img class="element__picture" src="./images/cards/anime-nebo.jpeg" alt="аниме небо">
+        <div class="element__text">
+          <h2 class="element__title">Луна</h2>
+          <button class="button element__like" type="button"></button>
         </div>
-        <button></button>
-      </section>
+      </div>
 
-      <section>
-        <div class="card">
-          <img class="" src="./images/anime-art-nebo-noch-planety-1487.jpeg" alt="аниме небо">
-          <h2>Луна</h2>
-          <button></button>
+      <div class="element">
+        <img class="element__picture" src="./images/cards/anime-dom.jpeg" alt="аниме дом">
+        <div class="element__text">
+          <h2 class="element__title">Сакура</h2>
+          <button class="button element__like" type="button"></button>
         </div>
+      </div>
 
-        <div class="card">
-          <img class="" src="./images/anime-doma-32276.jpeg" alt="аниме дом">
-          <h2>Сакура</h2>
-          <button></button>
+      <div class="element">
+        <img class="element__picture" src="./images/cards/dom-zima.jpeg" alt="зима дом">
+        <div class="element__text">
+          <h2 class="element__title">Зимний дом</h2>
+          <button class="button element__like" type="button"></button>
         </div>
+      </div>
 
-        <div class="card">
-          <img class="" src="./images/doma-pejzazh-zima-41211.jpeg" alt="зима дом">
-          <h2>Зимний дом</h2>
-          <button></button>
+      <div class="element">
+        <img class="element__picture" src="./images/cards/luna-ozero.jpeg" alt="луна ночь">
+        <div class="element__text">
+          <h2 class="element__title">Озеро</h2>
+          <button class="button element__like" type="button"></button>
         </div>
+      </div>
 
-        <div class="card">
-          <img class="" src="./images/luna-noch-ozera-pejzazh-priroda-50020.jpeg" alt="луна ночь">
-          <h2>Озеро</h2>
-          <button></button>
+      <div class="element">
+        <img class="element__picture" src="./images/cards/planeti.jpeg" alt="космос планеты">
+        <div class="element__text">
+          <h2 class="element__title">Космос</h2>
+          <button class="button element__like" type="button"></button>
         </div>
+      </div>
 
-        <div class="card">
-          <img class="" src="./images/space-kosmos-planeti-vzlet-vzriv-77275.jpeg" alt="космос планеты">
-          <h2>Космос</h2>
-          <button></button>
+      <div class="element">
+        <img class="element__picture" src="./images/cards/cosmos.jpg" alt="космос обои">
+        <div class="element__text">
+          <h2 class="element__title">Арт</h2>
+          <button class="button element__like" type="button"></button>
         </div>
+      </div>
+    </section>
+  </main>
 
-        <div class="card">
-          <img class="" src="./images/cosmos.jpg" alt="космос обои">
-          <h2>Арт</h2>
-          <button></button>
-        </div>
-      </section>
-    </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2023 Nikita Ovchinnikov</p>
+  </footer>
 
-    <footer class="footer">
-      <p class="footer__copyright">&copy; 2023 Nikita Ovchinnikov</p>
-    </footer>
+  <div class="popup">
+    <form class="popup__container" method="post" name="form-popup">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <input name="name-input" value="" class="popup__input popup__input_name" type="text" placeholder="Имя">
+      <input name="job-input" value="" class="popup__input popup__input_job" type="text" placeholder="Описание">
+      <button class="popup__button popup__button_act_submit" type="submit" value="save">Отправить</button>
+      <button class="popup__button popup__button_act_exit" type="button" value="close"></button>
+    </form>
+  </div>
 
-    <div class="poppup">
-      <section>
-        <button></button>
-        <form class="">
-          <h3></h3>
-          <input>
-          <input>
-          <button></button>
-        </form>
-      </section>
-    </div>
-
-    <script src="./scripts/index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
+
 </html>
