@@ -4,8 +4,6 @@
   background-image: url('../../../../images/icons/icon-edit.svg');
   background-size: 10px;
   border: 1px solid #fff;
-  box-sizing: border-box;
-	cursor: pointer;
   grid-area: edit;
 }
 
