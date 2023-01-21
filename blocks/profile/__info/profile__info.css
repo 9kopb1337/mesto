@@ -1,8 +1,8 @@
 .profile__info{
   display: grid;
   grid-template-areas:
-    "name buttonEdit"
-    "discr .";
+    "name edit"
+    "description .";
   grid-template-columns: 1fr min-content;
   column-gap: 18px;
   align-items: baseline;

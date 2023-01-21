@@ -10,7 +10,7 @@
   font-size: 18px;
   width: 100%;
   line-height: 22px;
-  grid-area: discr;
+  grid-area: description;
 }
 
 @media screen and (max-width: 900px) {
