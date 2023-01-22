@@ -12,7 +12,5 @@
 @media screen and (max-width: 685px) {
   .profile__avatar {
     margin: 0 0 22.5px 0;
-    max-width: 120px;
-    min-height: 120px;
   }
 }

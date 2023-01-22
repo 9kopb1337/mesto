@@ -1,8 +1,8 @@
 .element {
 	display: flex;
 	flex-direction: column;
-	width: 282px;
-  height: 361px;
+	max-width: 282px;
+  min-height: 361px;
   color: #000;
   border-radius: 10px;
 }
