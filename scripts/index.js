@@ -3,7 +3,7 @@ const buttonEditOpen = document.querySelector(".profile__button_act_edit");
 const buttonClose = document.querySelector(".popup__button_act_exit");
 const getName = document.querySelector(".profile__name");
 const getDescription = document.querySelector(".profile__description");
-const editForm = document.querySelector(".popup__container");
+const editForm = document.querySelector(".popup__form");
 let nameInput = editForm.querySelector(".popup__input_type_name");
 let descriptionInput = editForm.querySelector(".popup__input_type_description");
 
