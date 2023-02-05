@@ -34,6 +34,18 @@ const initialCards = [
   }
 ];
 
+const elementsList = document.querySelector('.elements');
+const elementTemplate = document.querySelector('.elements-template').content;
+
+initialCards.forEach((element) => {
+  const cardElement = elementTemplate.cloneNode(true);
+
+  cardElement.querySelector('.element__title').textContent = element.name;
+  cardElement.querySelector('.element__picture').src = element.link;
+
+  elementsList.append(cardElement);
+})
+
 function openPopup() {
   popup.classList.add("popup_opened");
   nameInput.value = getName.textContent;
