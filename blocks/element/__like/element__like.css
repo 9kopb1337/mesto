@@ -20,7 +20,7 @@
     opacity: .5;
 }
 
-.element__like:active {
+.element__like_active {
   opacity: 1;
   background-image: url('../../../images/icons/heart_active.svg');
 }
