@@ -51,6 +51,8 @@ initialCards.forEach((element) => {
     evt.target.closest('.element').remove();
   })
 
+
+
   elementsList.append(cardElement);
 });
 
@@ -128,7 +130,6 @@ buttonAddOpen.addEventListener("click", openAddPopup);
 buttonClosePhoto.addEventListener("click", closeAddPopup);
 addPhotoForm.addEventListener("submit", addPhotoSubmitHandler);
 
-
 const photoPopup = document.querySelector('.popup_open_photo');
 const oneMorePopup = document.querySelector('.popup__photo');
 const photo = document.querySelector('.element__picture');
@@ -138,8 +139,9 @@ const photoPopupClose = document.querySelector('.popup__button_act_exit_photo_po
 
 function openPhotoPopup() {
   photoPopup.classList.add("popup_opened");
-  photoPopup.querySelector(".popup__photo-link").src = photo.src;
+  photoPopup.querySelector(".popup__photo-link").src = photoLink;
   photoPopup.querySelector(".popup__photo-name").textContent = photoName;
+
 }
 
 function closePhotoPopup() {

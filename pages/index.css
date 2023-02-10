@@ -33,3 +33,6 @@
 @import url('../blocks/popup/__photo/popup__photo.css');
 @import url('../blocks/popup/__photo-link/popup__photo-link.css');
 @import url('../blocks/popup/__photo-name/popup__photo-name.css');
+@import url('../blocks/popup/_type/popup_type_add.css');
+@import url('../blocks/popup/_type/popup_type_edit.css');
+@import url('../blocks/popup/_type/popup_type_photo.css');
