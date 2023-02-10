@@ -47,8 +47,8 @@ initialCards.forEach((element) => {
     evt.target.classList.toggle('element__like_active');
   })
 
-  cardElement.querySelector('.element__delete').addEventListener('click', (e) => {
-    e.target.closest('.element').remove();
+  cardElement.querySelector('.element__delete').addEventListener('click', (evt) => {
+    evt.target.closest('.element').remove();
   })
 
   elementsList.append(cardElement);
@@ -109,8 +109,12 @@ function addPhotoSubmitHandler(evt) {
     evt.target.classList.toggle('element__like_active');
   })
 
-  cardElement.querySelector('.element__delete').addEventListener('click', (e) => {
-    e.target.closest('.element').remove();
+  cardElement.querySelector('.element__delete').addEventListener('click', (evt) => {
+    evt.target.closest('.element').remove();
+  })
+
+  cardElement.querySelector('.element__picture').addEventListener('click', () => {
+
   })
 
   elementsList.prepend(cardElement);
@@ -124,3 +128,23 @@ buttonAddOpen.addEventListener("click", openAddPopup);
 buttonClosePhoto.addEventListener("click", closeAddPopup);
 addPhotoForm.addEventListener("submit", addPhotoSubmitHandler);
 
+
+const photoPopup = document.querySelector('.popup_open_photo');
+const oneMorePopup = document.querySelector('.popup__photo');
+const photo = document.querySelector('.element__picture');
+const photoLink = document.querySelector('.element__picture').src;
+const photoName = document.querySelector('.element__title').textContent;
+const photoPopupClose = document.querySelector('.popup__button_act_exit_photo_popup');
+
+function openPhotoPopup() {
+  photoPopup.classList.add("popup_opened");
+  photoPopup.querySelector(".popup__photo-link").src = photo.src;
+  photoPopup.querySelector(".popup__photo-name").textContent = photoName;
+}
+
+function closePhotoPopup() {
+  photoPopup.classList.remove("popup_opened");
+}
+
+photo.addEventListener('click', openPhotoPopup);
+photoPopupClose.addEventListener('click', closePhotoPopup);
