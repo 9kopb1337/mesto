@@ -43,14 +43,15 @@ initialCards.forEach((element) => {
   cardElement.querySelector(".element__title").textContent = element.name;
   cardElement.querySelector(".element__picture").src = element.link;
 
-  const buttonLike = cardElement.querySelector(".element__like");
-  buttonLike.addEventListener("click", function (evt) {
-    evt.target.classList.toggle("element__like_active");
-  });
+  cardElement.querySelector('.element__like').addEventListener('click', (evt) => {
+    evt.target.classList.toggle('element__like_active');
+  })
+
+  cardElement.querySelector('.element__delete').addEventListener('click', (e) => {
+    e.target.closest('.element').remove();
+  })
 
   elementsList.append(cardElement);
-
-
 });
 
 function openEditPopup() {
@@ -104,37 +105,22 @@ function addPhotoSubmitHandler(evt) {
     photoNameInput.value;
   cardElement.querySelector(".element__picture").src = photoLinkInput.value;
 
-  const buttonLike = cardElement.querySelector(".element__like");
-  buttonLike.addEventListener("click", function (evt) {
-    evt.target.classList.toggle("element__like_active");
-  });
+  cardElement.querySelector('.element__like').addEventListener('click', (evt) => {
+    evt.target.classList.toggle('element__like_active');
+  })
+
+  cardElement.querySelector('.element__delete').addEventListener('click', (e) => {
+    e.target.closest('.element').remove();
+  })
 
   elementsList.prepend(cardElement);
 
   closeAddPopup();
   photoNameInput.value = "";
   photoLinkInput.value = "";
-
-  const deleteButton = document.querySelector(".element__delete");
-  deleteButton.addEventListener("click", function () {
-    const elementsPhoto = deleteButton.closest(".element");
-    elementsPhoto.remove();
-  });
 }
 
 buttonAddOpen.addEventListener("click", openAddPopup);
 buttonClosePhoto.addEventListener("click", closeAddPopup);
 addPhotoForm.addEventListener("submit", addPhotoSubmitHandler);
-
-
-function removeElementHandler(evt) {
-  evt.preventDefault();
-  const elementsPhoto = deleteButton.closest(".element");
-  elementsPhoto.remove();
-}
-
-
-const deleteButton = document.querySelector(".element__delete");
-deleteButton.addEventListener("click", removeElementHandler);
-
 
