@@ -43,15 +43,39 @@ initialCards.forEach((element) => {
   cardElement.querySelector(".element__title").textContent = element.name;
   cardElement.querySelector(".element__picture").src = element.link;
 
-  cardElement.querySelector('.element__like').addEventListener('click', (evt) => {
-    evt.target.classList.toggle('element__like_active');
-  })
+  cardElement
+    .querySelector(".element__like")
+    .addEventListener("click", (evt) => {
+      evt.target.classList.toggle("element__like_active");
+    });
 
-  cardElement.querySelector('.element__delete').addEventListener('click', (evt) => {
-    evt.target.closest('.element').remove();
-  })
+  cardElement
+    .querySelector(".element__delete")
+    .addEventListener("click", (evt) => {
+      evt.target.closest(".element").remove();
+    });
 
 
+  const photoPopup = document.querySelector('.popup_open_photo');
+  const photo = cardElement.querySelector(".element__picture");
+  const title = cardElement.querySelector(".element__title");
+  const popupPhoto = document.querySelector('.popup_type_photo');
+  const buttonClosePhoto = document.querySelector('.popup__button_act_exit_photo_popup');
+
+  photo.addEventListener("click", () => {
+    const popupImageImg = popupPhoto.querySelector(".popup__photo-link");
+    const popupImageTitle = popupPhoto.querySelector(".popup__photo-name");
+    photoPopup.classList.add('popup_opened');
+    popupImageImg.src = photo.src;
+    popupImageTitle.textContent = title.textContent;
+  });
+
+
+  function closeAddPopup() {
+    photoPopup.classList.remove("popup_opened");
+  }
+
+  buttonClosePhoto.addEventListener("click", closeAddPopup);
 
   elementsList.append(cardElement);
 });
@@ -107,46 +131,41 @@ function addPhotoSubmitHandler(evt) {
     photoNameInput.value;
   cardElement.querySelector(".element__picture").src = photoLinkInput.value;
 
-  cardElement.querySelector('.element__like').addEventListener('click', (evt) => {
-    evt.target.classList.toggle('element__like_active');
-  })
+  cardElement
+    .querySelector(".element__like")
+    .addEventListener("click", (evt) => {
+      evt.target.classList.toggle("element__like_active");
+    });
 
-  cardElement.querySelector('.element__delete').addEventListener('click', (evt) => {
-    evt.target.closest('.element').remove();
-  })
-
-  cardElement.querySelector('.element__picture').addEventListener('click', () => {
-
-  })
+  cardElement
+    .querySelector(".element__delete")
+    .addEventListener("click", (evt) => {
+      evt.target.closest(".element").remove();
+    });
 
   elementsList.prepend(cardElement);
 
   closeAddPopup();
   photoNameInput.value = "";
   photoLinkInput.value = "";
+
+  const photoPopup = document.querySelector('.popup_open_photo');
+  const photo = document.querySelector(".element__picture");
+  const title = document.querySelector(".element__title");
+  const popupPhoto = document.querySelector('.popup_type_photo');
+
+  photo.addEventListener("click", () => {
+    const popupImageImg = popupPhoto.querySelector(".popup__photo-link");
+    const popupImageTitle = popupPhoto.querySelector(".popup__photo-name");
+    photoPopup.classList.add('popup_opened');
+    popupImageImg.src = photo.src;
+    popupImageTitle.textContent = title.textContent;
+  });
 }
 
 buttonAddOpen.addEventListener("click", openAddPopup);
 buttonClosePhoto.addEventListener("click", closeAddPopup);
 addPhotoForm.addEventListener("submit", addPhotoSubmitHandler);
 
-const photoPopup = document.querySelector('.popup_open_photo');
-const oneMorePopup = document.querySelector('.popup__photo');
-const photo = document.querySelector('.element__picture');
-const photoLink = document.querySelector('.element__picture').src;
-const photoName = document.querySelector('.element__title').textContent;
-const photoPopupClose = document.querySelector('.popup__button_act_exit_photo_popup');
 
-function openPhotoPopup() {
-  photoPopup.classList.add("popup_opened");
-  photoPopup.querySelector(".popup__photo-link").src = photoLink;
-  photoPopup.querySelector(".popup__photo-name").textContent = photoName;
 
-}
-
-function closePhotoPopup() {
-  photoPopup.classList.remove("popup_opened");
-}
-
-photo.addEventListener('click', openPhotoPopup);
-photoPopupClose.addEventListener('click', closePhotoPopup);
