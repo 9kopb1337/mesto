@@ -63,11 +63,11 @@ initialCards.forEach((element) => {
   const buttonClosePhoto = document.querySelector('.popup__button_act_exit_photo_popup');
 
   photo.addEventListener("click", () => {
-    const popupImageImg = popupPhoto.querySelector(".popup__photo-link");
-    const popupImageTitle = popupPhoto.querySelector(".popup__photo-name");
+    const popupPhotoImg = popupPhoto.querySelector(".popup__photo-link");
+    const popupPhotoTitle = popupPhoto.querySelector(".popup__photo-name");
     photoPopup.classList.add('popup_opened');
-    popupImageImg.src = photo.src;
-    popupImageTitle.textContent = title.textContent;
+    popupPhotoImg.src = photo.src;
+    popupPhotoTitle.textContent = title.textContent;
   });
 
 
@@ -155,11 +155,11 @@ function addPhotoSubmitHandler(evt) {
   const popupPhoto = document.querySelector('.popup_type_photo');
 
   photo.addEventListener("click", () => {
-    const popupImageImg = popupPhoto.querySelector(".popup__photo-link");
-    const popupImageTitle = popupPhoto.querySelector(".popup__photo-name");
+    const popupPhotoImg = popupPhoto.querySelector(".popup__photo-link");
+    const popupPhotoTitle = popupPhoto.querySelector(".popup__photo-name");
     photoPopup.classList.add('popup_opened');
-    popupImageImg.src = photo.src;
-    popupImageTitle.textContent = title.textContent;
+    popupPhotoImg.src = photo.src;
+    popupPhotoTitle.textContent = title.textContent;
   });
 }
 

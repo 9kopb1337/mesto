@@ -1,3 +1,5 @@
 .popup_type_edit {
   background: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  transition: opacity 0.6s ease;
 }
