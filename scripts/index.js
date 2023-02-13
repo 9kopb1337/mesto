@@ -60,7 +60,7 @@ initialCards.forEach((element) => {
   const photo = cardElement.querySelector(".element__picture");
   const title = cardElement.querySelector(".element__title");
   const popupPhoto = document.querySelector('.popup_type_photo');
-  const buttonClosePhoto = document.querySelector('.popup__button_act_exit_photo_popup');
+  const buttonClosePhoto = photoPopup.querySelector('.popup__button_act_exit');
 
   photo.addEventListener("click", () => {
     const popupPhotoImg = popupPhoto.querySelector(".popup__photo-link");
@@ -103,17 +103,17 @@ editForm.addEventListener("submit", editFormSubmitHandler);
 
 const popupAddPhoto = document.querySelector(".popup_add_photo");
 const buttonAddOpen = document.querySelector(".profile__button_act_add");
-const buttonClosePhoto = document.querySelector(
-  ".popup__button_act_exit_photo"
+const buttonClosePhoto = popupAddPhoto.querySelector(
+  ".popup__button_act_exit"
 );
 const getPhotoName = document.querySelector(".element__title");
 const getPhotoLink = document.querySelector(".element__picture");
 const addPhotoForm = document.querySelector(".popup__form_photo");
 let photoNameInput = addPhotoForm.querySelector(
-  ".popup__input_type_name_photo"
+  ".popup__input_type_name"
 );
 let photoLinkInput = addPhotoForm.querySelector(
-  ".popup__input_type_photo_link"
+  ".popup__input_type_description"
 );
 
 function openAddPopup() {
