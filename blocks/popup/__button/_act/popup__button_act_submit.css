@@ -1,6 +1,5 @@
 .popup__button_act_submit {
   padding: 14px 125px;
-  margin-top: 47px;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
@@ -12,6 +11,7 @@
   border: none;
   cursor: pointer;
   min-width: 358px;
+  margin-top: 35px;
 }
 
 .popup__button_act_submit:hover {
