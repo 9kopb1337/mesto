@@ -1,22 +1,25 @@
 const config = {
-  formSelector: '.popup__form',
+  formSelector: '.popup__container',
   inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
+  submitButtonSelector: '.popup__button_act_submit',
   inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  inputErrorClass: 'form__item-error',
+  errorClass: 'form__item-error'
 }
 
-const formPlace = document.forms.place;
-const formPlaceFields = Array.from(formPlace.querySelectorAll('.popup__input'));
-const buttonSubmitFormPlace = formPlace.querySelector('.popup__button_act_submit');
+const formProfile = document.forms.profile;
+const formPhoto = document.forms.photo;
 
-formPlaceFields.forEach((elementField) => {
+const enableValidation = () => {
+  const formPlace = document.forms.profile;
+  const formPlaceFields = Array.from(formPlace.querySelectorAll('.popup__input'));
+  const buttonSubmitFormPlace = formPlace.querySelector('.popup__button_act_submit');
+
+ formPlaceFields.forEach((elementField) => {
   const elementError = formPlace.querySelector(`#${elementField.id} + .form__item-error`);
 
-  elementField.addEventListener('input', (e) => {
-    const field = e.target;
-
+  elementField.addEventListener('input', (evt) => {
+    const field = evt.target;
     const fieldIsValid = field.validity.valid;
     elementError.textContent = field.validationMessage;
 
@@ -26,27 +29,19 @@ formPlaceFields.forEach((elementField) => {
       field.classList.remove('form__item-input_invalid');
     }
 
-    const formIsValid = formPlaceFields.every(({ validity}) => validity.valid);
+    const formIsValid = formPlaceFields.every(({ validity }) => validity.valid);
     if (formIsValid) {
       buttonSubmitFormPlace.removeAttribute('disabled');
     } else {
       buttonSubmitFormPlace.setAttribute('disabled', 'disabled');
     }
-  });
+  })
+ })
+}
+
+const formList = Array.from(document.querySelectorAll(".form"));
+formList.forEach((formElement) => {
+  formElement.addEventListener("submit", enableValidation)
 })
 
-const submitPlaceHandler = (e) => {
-  e.preventDefault();
-
-  const formIsValid = formPlaceFields.every(({ validity }) => validity.valid);
-  if(formIsValid) {
-    const name = e.target.name.value;
-    const link = e.target.link.value;
-
-    closePopup(popupPlace);
-
-    const place = createPlace(name, link);
-
-    addPlace(place);
-  }
-}
+enableValidation();
