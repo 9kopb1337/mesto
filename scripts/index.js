@@ -1,10 +1,3 @@
-const closeByOverlay = (evt) => {
-  const openedPopup = document.querySelector(".popup_opened");
-  if (evt.target === openedPopup) {
-    closePopup(openedPopup);
-  }
-};
-
 const closeByEscape = (evt) => {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".popup_opened");

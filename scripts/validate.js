@@ -7,14 +7,14 @@ const config = {
   errorClass: "popup__input-error_active"
 }
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add("popup__item-error");
   errorElement.textContent = errorMessage;
   errorElement.classList.add("popup__item-error");
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove("popup__item-error");
   errorElement.textContent = "";
@@ -28,7 +28,7 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 };
 
-const toggleButtonState = (inputList, submitButtonSelector, inactiveButtonClass) => {
+const toggleButtonState = (inputList, submitButtonSelector, config) => {
   if (hasInvalidInput(inputList)) {
     submitButtonSelector.classList.add("popup__button_inactive");
   } else {
@@ -42,7 +42,7 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, config) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   const buttonElement = formElement.querySelector('.popup__button_act_submit');
   toggleButtonState(inputList, buttonElement, config);
