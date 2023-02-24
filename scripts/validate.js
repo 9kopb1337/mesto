@@ -4,19 +4,20 @@ const config = {
   submitButtonSelector: ".popup__button_act_submit",
   inactiveButtonClass: "popup__button_inactive",
   inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_active"
+  errorClass: "popup__input-error_active",
+  error: '.popup__item-error'
 }
 
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add("popup__item-error");
+  inputElement.classList.add(config.error);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add("popup__item-error");
+  errorElement.classList.add(config.error);
 };
 
 const hideInputError = (formElement, inputElement, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("popup__item-error");
+  inputElement.classList.remove(config.error);
   errorElement.textContent = "";
 };
 
@@ -30,9 +31,9 @@ const checkInputValidity = (formElement, inputElement) => {
 
 const toggleButtonState = (inputList, submitButtonSelector, config) => {
   if (hasInvalidInput(inputList)) {
-    submitButtonSelector.classList.add("popup__button_inactive");
+    submitButtonSelector.classList.add(config.inactiveButtonClass);
   } else {
-    submitButtonSelector.classList.remove("popup__button_inactive");
+    submitButtonSelector.classList.remove(config.inactiveButtonClass);
   }
 };
 
@@ -43,11 +44,11 @@ const hasInvalidInput = (inputList) => {
 };
 
 const setEventListeners = (formElement, config) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__button_act_submit');
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
   toggleButtonState(inputList, buttonElement, config);
-  formElement.addEventListener('reset', () => {
-    setTimeout(() => {
+  formElement.addEventListener('reset', (config) => {
+    setTimeout((config) => {
       toggleButtonState(inputList, buttonElement, config)
     }, 0);
   })
@@ -60,7 +61,7 @@ const setEventListeners = (formElement, config) => {
 };
 
 const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(".form"));
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
     setEventListeners(formElement, config);
   });
