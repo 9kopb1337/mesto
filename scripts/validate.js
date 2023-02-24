@@ -8,14 +8,14 @@ const config = {
   error: '.popup__item-error'
 }
 
-const showInputError = (formElement, inputElement, errorMessage, config) => {
+const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(config.error);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(config.error);
 };
 
-const hideInputError = (formElement, inputElement, config) => {
+const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(config.error);
   errorElement.textContent = "";
@@ -29,7 +29,7 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 };
 
-const toggleButtonState = (inputList, submitButtonSelector, config) => {
+const toggleButtonState = (inputList, submitButtonSelector) => {
   if (hasInvalidInput(inputList)) {
     submitButtonSelector.classList.add(config.inactiveButtonClass);
   } else {
