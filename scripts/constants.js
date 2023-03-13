@@ -20,6 +20,7 @@ const photoLinkInput = photoForm.querySelector(".popup__input_type_description")
 const buttonCloseAddPhoto = popupAddPhoto.querySelector(".popup__button_act_exit");
 
 const initialCards = [
+
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -45,3 +46,13 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
+
+const config = {
+  formSelector: ".form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button_act_submit",
+  inactiveButtonClass: "popup__button_inactive",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_active",
+  error: '.popup__item-error'
+}

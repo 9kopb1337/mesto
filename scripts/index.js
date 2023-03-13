@@ -57,8 +57,9 @@ const createCard = (cardData) => {
   return card;
 };
 
-const renderInitialCards = () => cardElements.append(...initialCards.map(createCard));
-renderInitialCards();
+const renderInitialCards = () =>
+  cardElements.append(...initialCards.map(createCard));
+//renderInitialCards();
 
 photoForm.addEventListener("submit", (event) => {
   event.preventDefault(event);
@@ -72,12 +73,15 @@ photoForm.addEventListener("submit", (event) => {
 const popupList = document.querySelectorAll(".popup");
 
 popupList.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-  if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close-button')){
-  closePopup(evt.currentTarget);
-  }
+  popup.addEventListener("click", (evt) => {
+    if (
+      evt.target === evt.currentTarget ||
+      evt.target.classList.contains("popup__close-button")
+    ) {
+      closePopup(evt.currentTarget);
+    }
   });
-  });
+});
 
 popupEditProfile.addEventListener("submit", editProfile);
 
