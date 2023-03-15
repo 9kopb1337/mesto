@@ -1,3 +1,5 @@
+
+
 const closeByEscape = (evt) => {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".popup_opened");
@@ -57,10 +59,6 @@ const createCard = (cardData) => {
   return card;
 };
 
-const renderInitialCards = () =>
-  cardElements.append(...initialCards.map(createCard));
-//renderInitialCards();
-
 photoForm.addEventListener("submit", (event) => {
   event.preventDefault(event);
   const name = photoNameInput.value;
@@ -88,3 +86,5 @@ popupEditProfile.addEventListener("submit", editProfile);
 buttonEditClose.addEventListener("click", () => closePopup(popupEditProfile));
 buttonCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
 buttonClosePhoto.addEventListener("click", () => closePopup(photoPopup));
+
+
