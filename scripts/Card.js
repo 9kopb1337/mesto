@@ -26,9 +26,11 @@ class Card {
   _setEventListeners() {
     this._elementLike.addEventListener("click", () => this._likePhoto());
     this._elementDelete.addEventListener("click", () => this._deletePhoto());
-    this._elementPhoto.addEventListener("click", () =>
-      this._handleCardClick(this._name, this._link)
-    );
+    this._elementPhoto.addEventListener("click", () =>  this._handleCardClick({
+      link: this._link,
+      name: this._name,
+      alt: this._name,
+    }));
   }
 
   generateCard() {
