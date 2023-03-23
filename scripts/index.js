@@ -71,6 +71,7 @@ buttonEditOpen.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
   openPopup(popupEditProfile);
+  validationProfileEdit.resetValidation();
 });
 
 popupEditProfile.addEventListener("submit", (evt) => {
@@ -83,6 +84,7 @@ popupEditProfile.addEventListener("submit", (evt) => {
 buttonAddOpen.addEventListener("click", () => {
   openPopup(popupAddPhoto);
   photoForm.reset();
+  validationPhotoAdd.resetValidation();
 });
 
 const addCard = (card) => {
