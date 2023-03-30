@@ -1,6 +1,12 @@
 import { initialCards, config } from "./constants.js";
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
+import { Section } from "./Section.js";
+import { UserInfo } from "./UserInfo.js";
+import { Popup } from "./Popup";
+import { PopupWithForm } from "./PopupWithForm";
+import { PopupWithImage } from "./PopupWithImage";
+import "../pages/index.css";
 
 const cardElements = document.querySelector(".elements");
 const cardTemplate = document

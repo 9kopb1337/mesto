@@ -1,0 +1,32 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "yandex practicum",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/9kopb1337/mesto.git"
+  },
+  "author": "Novch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/9kopb1337/mesto/issues"
+  },
+  "homepage": "https://github.com/9kopb1337/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.1"
+  },
+  "dependencies": {
+    "core-js": "^3.29.1"
+  }
+}
