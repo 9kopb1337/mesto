@@ -42,38 +42,36 @@ const popupFormProfile = new PopupWithForm('.popup_edit_profile', {
 buttonEditOpen.addEventListener('click', () => {
   popupFormProfile.open();
   popupFormProfile.setInputValues(profileInfo.getUserInfo());
-  validatorForms['form-profile'].resetValidation();
+  validationForm['form-profile'].resetValidation();
 })
 
 const popupFormAddCards = new PopupWithForm('.popup_add_photo', {
   submitFunc: ({ link, name }) => {
     cardSection.addItem(createCard({
       name: name,
-      link: link,
-      alt: name
+      link: link
     }))
   }
 })
 
 buttonAddOpen.addEventListener('click', () => {
   popupFormAddCards.open();
-  validatorForms['form-photo'].resetValidation();
+  validationForm['form-photo'].resetValidation();
 });
 
 photoCardPopup.setEventListeners();
 popupFormProfile.setEventListeners();
 popupFormAddCards.setEventListeners();
 
-const validatorForms = {};
+const validationForm = {};
 const enableValidation = (data) => {
   const listForm = Array.from(document.querySelectorAll(data.formSelector))
   listForm.forEach((formElement) => {
     const formValidator = new FormValidator(data, formElement);
     const formName = formElement.getAttribute('name');
 
-    validatorForms[formName] = formValidator;
+    validationForm[formName] = formValidator;
     formValidator.enableValidation();
   })
 }
-
 enableValidation(config);
