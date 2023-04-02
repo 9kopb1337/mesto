@@ -1,4 +1,4 @@
-export class UserInfo {
+class UserInfo {
   constructor({ selectorUserName, selectorUserDescription }) {
     this._profileName = document.querySelector(selectorUserName);
     this._profileDescription = document.querySelector(selectorUserDescription);
@@ -14,3 +14,5 @@ export class UserInfo {
     this._profileDescription.textContent = data.description;
   }
 }
+
+export { UserInfo };
