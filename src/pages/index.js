@@ -34,7 +34,7 @@ const profileInfo = new UserInfo({
 });
 
 const popupFormProfile = new PopupWithForm('.popup_edit_profile', {
-  submitCallback: (data) => {
+  submitFunc: (data) => {
     profileInfo.setUserInfo(data);
   }
 })

@@ -20,8 +20,8 @@ class PopupWithForm extends Popup {
     });
   }
   close() {
-    this._formSubmit.reset();
     super.close();
+    this._formSubmit.reset();
   }
   setEventListeners() {
     super.setEventListeners();
