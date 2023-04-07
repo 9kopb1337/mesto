@@ -6,7 +6,9 @@
   background-color: #fff;
   background-size: contain;
   background-repeat: no-repeat;
-  margin-right: 20px;
+  align-self: center;
+  text-align: center;
+  padding: 0;
 }
 
 @media screen and (max-width: 980px) {
