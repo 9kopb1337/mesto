@@ -22,8 +22,9 @@ export class Api {
 
   getCards() {
     return fetch(this._url + "/cohort-63/cards", {
-      method: "GET",
-      headers: this._headers,
+      headers: {
+        authorization: this._authorization
+      },
     }).then((res) => this._checkRes(res));
   }
 

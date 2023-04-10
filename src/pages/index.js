@@ -19,15 +19,15 @@ const indexApi = new Api(apiRes);
 Promise.all([indexApi.getProfileInfo(), indexApi.getCards()])
 .then(([resUser, resCard]) => {
   currentUserId = resUser._id;
-  profileInfo.patchProfileInfo(resUser);
-  profileInfo.patchAvatar(resUser);
-  cardSection.renderContent(resCard, userCurrentId)
+  profileInfo.setUserInfo(resUser);
+  profileInfo.setUserAvatar(resUser);
+  cardSection.renderContent(resCard, currentUserId)
 })
 
 const photoCardPopup = new PopupWithImage('.popup_type_photo');
 
 const createCard = (data, user) => {
-  const card = new Card({data: data, userId: user, templateSelector: '.template-card',
+  const card = new Card({data: data, userId: user, templateSelector: '.elements-template',
 
   handleCardClick: () => {
     photoCardPopup.open(data);
@@ -40,14 +40,6 @@ const createCard = (data, user) => {
     })
   },
 
-  /*handleCardDeleteLike: (cardId) => {
-    indexApi.deleteCardLike(cardId)
-    .then((res) => {
-      card.renderCardLike(res)
-    })
-    .catch((err) => alert(err))
-  },*/
-
   deleteCard: (cardID, cardElement) => {
     popupCardDelete.open(cardID, cardElement);
   }
@@ -58,7 +50,7 @@ const createCard = (data, user) => {
 }
 
 const cardSection = new Section({
-  renderContent: (item, userId) => {
+  renderer: (item, userId) => {
     cardSection.addItem(createCard(item, userId));
   }
 }, '.elements');
@@ -89,7 +81,7 @@ const popupFormAddCards = new PopupWithForm('.popup_add_photo', {
   submitCallback: (data) => {
     indexApi.postNewCard(data)
     .then((newCard) => {
-      cardSection.prependItem(createCard(newCard, currentUserId));
+      cardSection.addItem(createCard(newCard, currentUserId));
       popupFormAddCards.close();
     })
   }
@@ -112,7 +104,7 @@ const popupAvatarForm = new PopupWithForm('.popup_type_avatar', {
 
 popupAvatar.addEventListener('click', () => {
   popupAvatarForm.open();
-  validationForm['form-avatar'].clearValidationForm();
+  validationForm['form-avatar'].resetValidation();
 })
 
 const popupCardDelete = new PopupWithDelete('.popup_type_delete', {

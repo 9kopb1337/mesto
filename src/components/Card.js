@@ -1,5 +1,5 @@
 export class Card {
-  constructor({data, handleCardClick, deleteCard, likeCard, templateSelector, userId}) {
+  constructor({data, handleCardClick, deleteCard, likeCard, removeCardLike, templateSelector, userId}) {
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._setLike = likeCard;
@@ -12,6 +12,7 @@ export class Card {
     this._dataLikes = data.likes;
     this._ownerId = data.owner._id;
     this._userId = userId;
+    this._removeLike = removeCardLike;
   }
 
   _getTemplate() {
@@ -46,11 +47,11 @@ export class Card {
   }
 
   isLiked() {
-    return this._dataLikes.find(item => item._id === this._userId);
+    return this._dataLikes.some(like => like._id === this._userId);
   }
 
   likePhoto() {
-    this.isLiked() == true ? this._removeLike(this.idCard) : this._setLike(this.idCard);
+    this.isLiked() === true ? this._removeLike(this.idCard) : this._setLike(this.idCard);
   }
 
   renderLikes(card) {
@@ -58,7 +59,7 @@ export class Card {
 
     this._dataLikes.length === 0 ? this._photoElementLikesNumber.textContent = '0' : this._photoElementLikesNumber.textContent = this._dataLikes.length;
 
-    this.isLiked() == true ? this._photoElementLike.classList.add('element__like_active') : this._photoElementLike.classList.remove('element__like_active');
+    this.isLiked() === true ? this._photoElementLike.classList.add('element__like_active') : this._photoElementLike.classList.remove('element__like_active');
   }
 
   _deletePhoto() {
