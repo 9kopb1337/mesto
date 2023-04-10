@@ -2,6 +2,7 @@ export class Api {
   constructor(config) {
     this._url = config.url;
     this._headers = config.headers;
+    this._authorization = config.headers['authorization'];
   }
 
   _checkRes(res) {
@@ -13,9 +14,10 @@ export class Api {
 
   getProfileInfo() {
     return fetch(this._url + "/cohort-63/users/me", {
-      method: "GET",
-      headers: this._headers,
-    }).then((res) => this._checkRes(res))
+      headers: {
+        authorization: this._authorization
+      },
+    }).then((res) => this._checkRes(res));
   }
 
   getCards() {
@@ -25,13 +27,13 @@ export class Api {
     }).then((res) => this._checkRes(res));
   }
 
-  patchProfileInfo({ name, description }) {
+  patchProfileInfo(data) {
     return fetch(this._url + "/cohort-63/users/me", {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        description: description,
+        name: data.name,
+        description: data.description,
       }),
     }).then((res) => this._checkRes(res));
   }
@@ -46,13 +48,13 @@ export class Api {
     }).then((res) => this._checkRes(res));
   }
 
-  postNewCard(formData) {
+  postNewCard(data) {
     return fetch(this._url + "/cohort-63/cards", {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: formData.name,
-        link: formData.link,
+        name: data.name,
+        link: data.link,
       }),
     }).then((res) => this._checkRes(res));
   }
@@ -64,7 +66,7 @@ export class Api {
     }).then((res) => this._checkRes(res));
   }
 
-  likeCard() {
+  likeCard(cardId) {
     return fetch(`${this._url}/cohort-63/cards/likes/${cardId}`, {
       method: callbackIsLiked ? "DELETE" : "PUT",
       headers: this._headers,

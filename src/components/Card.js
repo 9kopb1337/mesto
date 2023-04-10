@@ -1,39 +1,64 @@
 export class Card {
-  constructor({data, handleCardClick, deleteCard, likeCard, cardSelector, userId}) {
-    this._cardSelector = cardSelector;
+  constructor({data, handleCardClick, deleteCard, likeCard, templateSelector, userId}) {
+    this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
+    this._setLike = likeCard;
+    this._likesNumber = data.likes.length;
+    this._deleteCard = deleteCard;
+    this.cardData = data;
+    this.idCard = data._id;
     this._name = data.name;
     this._link = data.link;
-    this._handleCardClick = handleCardClick;
-    this._deleteCard = deleteCard;
-    this._likeCard = likeCard;
-    this._ownerId = data.ownerId;
+    this._dataLikes = data.likes;
+    this._ownerId = data.owner._id;
     this._userId = userId;
-    this._idCard = data.id;
-    this._likes = data.likes;
   }
 
   _getTemplate() {
     const cardElement = document
-      .querySelector(this._cardSelector)
+      .querySelector(this._templateSelector)
       .content.querySelector(".element")
       .cloneNode(true);
 
     return cardElement;
   }
 
+  generateCard() {
+    this.photoElement = this._getTemplate();
+
+    this._photoElementTitle = this.photoElement.querySelector('.element__title');
+    this._photoElementPicture = this.photoElement.querySelector('.element__picture');
+    this._photoElementLike = this.photoElement.querySelector('.element__like');
+    this._photoElementLikesNumber = this.photoElement.querySelector('.element__likes-number');
+    this._photoElementDelete = this.photoElement.querySelector('.element__delete');
+
+    this._photoElementTitle.textContent = this._name;
+    this._photoElementPicture.src = this._link;
+    this._photoElementPicture.alt = this._name;
+
+    this.renderLikes(this.cardData);
+
+    if (this._ownerId !== this._userId) {
+      this._photoElementDelete.remove();
+    };
+
+    return this.photoElement;
+  }
+
   isLiked() {
-    return Boolean(this._likes.find(item => item._id === this._userId));
+    return this._dataLikes.find(item => item._id === this._userId);
   }
 
-  _likePhoto() {
-    if (this.isLiked()) {
-      this._elementLike.classList.toggle("element__like_active");
-    }
+  likePhoto() {
+    this.isLiked() == true ? this._removeLike(this.idCard) : this._setLike(this.idCard);
   }
 
-  toggleLikeState(res) {
-    this._elementNumOfLikes.textContent = res.likes.length;
-    this._elementLike.classList.toggle('element__like_active');
+  renderLikes(card) {
+    this._dataLikes = card.likes;
+
+    this._dataLikes.length === 0 ? this._photoElementLikesNumber.textContent = '0' : this._photoElementLikesNumber.textContent = this._dataLikes.length;
+
+    this.isLiked() == true ? this._photoElementLike.classList.add('element__like_active') : this._photoElementLike.classList.remove('element__like_active');
   }
 
   _deletePhoto() {
@@ -41,30 +66,9 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._elementLike.addEventListener("click", () => this._likeCard());
-    this._elementDelete.addEventListener("click", () => this._deleteCard());
-    this._elementPhoto.addEventListener("click", () =>  this._handleCardClick());
-  }
-
-  generateCard() {
-    this._element = this._getTemplate();
-    this._elementPhoto.src = this._link;
-    this._elementPhoto.alt = this._name;
-    this._element.querySelector(".element__text").textContent = this._name;
-    this._elementNumOfLikes.textContent = this._likes.length;
-
-    this._elementLike = this._element.querySelector(".element__like");
-    this._elementDelete = this._element.querySelector(".element__delete");
-    this._elementPhoto = this._element.querySelector(".element__picture");
-    this._elementNumOfLikes = this._element.querySelector('.element__likes-number');
-    if (this._ownerId != this._userId) {
-      this._element.querySelector('.element__delete').classList.add('.element__delete_hidden');
-    }
-
-    this._likePhoto();
-    this._setEventListeners();
-
-    return this._element;
+    this._photoElementLike.addEventListener("click", () => this._likeCard());
+    this._photoElementDelete.addEventListener("click", () => this._deleteCard());
+    this._photoElementPicture.addEventListener("click", () =>  this._handleCardClick());
   }
 }
 
