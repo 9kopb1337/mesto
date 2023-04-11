@@ -64,7 +64,7 @@ const cardSection = new Section({
 const profileInfo = new UserInfo({
   selectorUserName: '.profile__name',
   selectorUserDescription: '.profile__description',
-  selectorUserAvatar: '.profile__avatar'
+  selectorUserAvatar: '.profile__photo'
 });
 
 const popupFormProfile = new PopupWithForm('.popup_edit_profile', {
