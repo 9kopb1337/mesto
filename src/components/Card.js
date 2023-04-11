@@ -10,10 +10,10 @@ export class Card {
   }) {
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
-    this._setLike = handleLikeCard;
+    this._handleLikeCard = handleLikeCard;
     this._likesNumber = data.likes.length;
-    this._deleteCard = handleDeleteCard;
-    this._removeLike = handleRemoveCardLike;
+    this._handleDeleteCard = handleDeleteCard;
+    this._handleRemoveCardLike = handleRemoveCardLike;
     this.cardData = data;
     this.idCard = data._id;
     this._name = data.name;
@@ -67,9 +67,9 @@ export class Card {
 
   likePhoto() {
     if (this.isLiked()) {
-      this._removeLike(this.idCard);
+      this._handleRemoveCardLike(this.idCard);
     } else {
-      this._setLike(this.idCard);
+      this._handleLikeCard(this.idCard);
     }
   }
 
@@ -90,13 +90,13 @@ export class Card {
   }
 
   deleteCard() {
-    this.photoElement.remove();
+    this.cardElement.remove();
     this.cardElement = null;
   }
 
   _setEventListeners() {
     this._photoElementLike.addEventListener("click", () => this.likePhoto());
-    this._photoElementDelete.addEventListener("click", () => this._deleteCard(this, this.idCard));
+    this._photoElementDelete.addEventListener("click", () => this._handleDeleteCard(this, this.idCard));
     this._photoElementPicture.addEventListener("click", () => this._handleCardClick());
   }
 }

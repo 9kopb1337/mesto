@@ -117,7 +117,7 @@ const popupCardDelete = new PopupWithDelete('.popup_delete_photo', {
   submitCallback: (id, card) => {
     indexApi.deleteCard(id)
     .then(() => {
-      card.deletePhoto();
+      card.deleteCard();
       popupCardDelete.close();
     })
   }
