@@ -29,8 +29,8 @@ const photoCardPopup = new PopupWithImage('.popup_type_photo');
 const createCard = (data, user) => {
   const card = new Card({data: data, userId: user, templateSelector: '.elements-template',
 
-  handleCardClick: () => {
-    photoCardPopup.open(data);
+  handleCardClick: (card) => {
+    photoCardPopup.open(card);
   },
 
   likeCard: (cardId) => {
