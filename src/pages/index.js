@@ -22,7 +22,7 @@ Promise.all([indexApi.getProfileInfo(), indexApi.getCards()])
   profileInfo.setUserInfo(resUser);
   profileInfo.setUserAvatar(resUser);
   cardSection.renderContent(resCard, currentUserId)
-}).catch(err => console.log(err));
+})
 
 const photoCardPopup = new PopupWithImage('.popup_type_photo');
 
@@ -37,13 +37,13 @@ const createCard = (data, user) => {
     indexApi.likeCard(cardId)
     .then((res) => {
       card.renderLikes(res);
-    }).catch((err) => alert(err))
+    })
   },
 
   handleRemoveCardLike: (cardId) => {
     indexApi.removeLikeCard(cardId).then((res) => {
       card.renderLikes(res)
-    }).catch((err) => alert(err))
+    })
   },
 
   handleDeleteCard: (cardID, cardElement) => {
@@ -73,7 +73,7 @@ const popupFormProfile = new PopupWithForm('.popup_edit_profile', {
     .then((res) => {
       profileInfo.setUserInfo(res);
       popupFormProfile.close();
-    }).catch((err) => alert(err))
+    })
   }
 })
 
@@ -89,7 +89,7 @@ const popupFormAddCards = new PopupWithForm('.popup_add_photo', {
     .then((newCard) => {
       cardSection.addItem(createCard(newCard, currentUserId));
       popupFormAddCards.close();
-    }).catch((err) => alert(err))
+    })
   }
 })
 
@@ -104,7 +104,7 @@ const popupAvatarForm = new PopupWithForm('.popup_edit_avatar', {
     .then((resUser) => {
       profileInfo.patchAvatar(resUser);
       popupAvatarForm.close();
-    }).catch((err) => alert(err))
+    })
   }
 })
 
@@ -117,9 +117,9 @@ const popupCardDelete = new PopupWithDelete('.popup_delete_photo', {
   submitCallback: (id, card) => {
     indexApi.deleteCard(id)
     .then(() => {
-      card.deleteCard();
+      card.deletePhoto();
       popupCardDelete.close();
-    }).catch((err) => alert(err))
+    })
   }
 })
 

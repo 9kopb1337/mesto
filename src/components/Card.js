@@ -89,8 +89,9 @@ export class Card {
     }
   }
 
-  deletePhoto() {
+  deleteCard() {
     this.photoElement.remove();
+    this.cardElement = null;
   }
 
   _setEventListeners() {
