@@ -13,7 +13,7 @@ export class Api {
   }
 
   getProfileInfo() {
-    return fetch(this._url + "/cohort-63/users/me", {
+    return fetch(`${this._url}/users/me`, {
       headers: {
         authorization: this._authorization
       },
@@ -21,7 +21,7 @@ export class Api {
   }
 
   getCards() {
-    return fetch(this._url + "/cohort-63/cards", {
+    return fetch(`${this._url}/cards`, {
       headers: {
         authorization: this._authorization
       },
@@ -29,7 +29,7 @@ export class Api {
   }
 
   patchProfileInfo(data) {
-    return fetch(this._url + "/cohort-63/users/me", {
+    return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -40,7 +40,7 @@ export class Api {
   }
 
   patchAvatar(avatar) {
-    return fetch(this._url + "/cohort-63/users/me/avatar", {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -50,7 +50,7 @@ export class Api {
   }
 
   postNewCard(data) {
-    return fetch(this._url + "/cohort-63/cards", {
+    return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -61,14 +61,14 @@ export class Api {
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._url}/cohort-63/cards/${cardId}`, {
+    return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => this._checkRes(res));
   }
 
   likeCard(cardId) {
-    return fetch(`${this._url}/cohort-63/cards/likes/${cardId}`, {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: callbackIsLiked ? "DELETE" : "PUT",
       headers: this._headers,
       body: JSON.stringify({

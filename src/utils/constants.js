@@ -37,7 +37,7 @@ const config = {
 
 
 const apiRes = {
-  url: "https://mesto.nomoreparties.co/v1",
+  url: "https://mesto.nomoreparties.co/v1/cohort-63",
   headers: {
     authorization: "d1d57a13-4584-442b-a02a-78fc4756e763",
     "Content-Type": "application/json",
