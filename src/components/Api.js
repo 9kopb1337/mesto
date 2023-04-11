@@ -17,7 +17,7 @@ export class Api {
       headers: {
         authorization: this._authorization
       },
-    }).then((res) => this._checkRes(res));
+    }).then(res => this._checkRes(res));
   }
 
   getCards() {
@@ -25,7 +25,7 @@ export class Api {
       headers: {
         authorization: this._authorization
       },
-    }).then((res) => this._checkRes(res));
+    }).then(res => this._checkRes(res));
   }
 
   patchProfileInfo(data) {
@@ -36,17 +36,17 @@ export class Api {
         name: data.name,
         about: data.about,
       }),
-    }).then((res) => this._checkRes(res));
+    }).then(res => this._checkRes(res));
   }
 
-  patchAvatar(avatar) {
+  patchAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar,
+        avatar: data.avatar,
       }),
-    }).then((res) => this._checkRes(res));
+    }).then(res => this._checkRes(res));
   }
 
   postNewCard(data) {
@@ -57,23 +57,27 @@ export class Api {
         name: data.name,
         link: data.link,
       }),
-    }).then((res) => this._checkRes(res));
+    }).then(res => this._checkRes(res));
   }
 
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => this._checkRes(res));
+    }).then(res => this._checkRes(res));
   }
 
   likeCard(cardId) {
-    return fetch(`${this._url}/cards/likes/${cardId}`, {
-      method: callbackIsLiked ? "DELETE" : "PUT",
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: "PUT",
       headers: this._headers,
-      body: JSON.stringify({
-        likes,
-      }),
-    }).then((res) => this._checkRes(res));
+    }).then(res => this._checkRes(res));
+  }
+
+  removeLikeCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(res => this._checkRes(res))
   }
 }

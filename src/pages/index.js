@@ -22,25 +22,31 @@ Promise.all([indexApi.getProfileInfo(), indexApi.getCards()])
   profileInfo.setUserInfo(resUser);
   profileInfo.setUserAvatar(resUser);
   cardSection.renderContent(resCard, currentUserId)
-})
+}).catch(err => console.log(err));
 
 const photoCardPopup = new PopupWithImage('.popup_type_photo');
 
 const createCard = (data, user) => {
   const card = new Card({data: data, userId: user, templateSelector: '.elements-template',
 
-  handleCardClick: (card) => {
-    photoCardPopup.open(card);
+  handleCardClick: () => {
+    photoCardPopup.open(data);
   },
 
-  likeCard: (cardId) => {
-    indexApi.likePhoto(cardId)
+  handleLikeCard: (cardId) => {
+    indexApi.likeCard(cardId)
     .then((res) => {
       card.renderLikes(res);
-    })
+    }).catch((err) => alert(err))
   },
 
-  deleteCard: (cardID, cardElement) => {
+  handleRemoveCardLike: (cardId) => {
+    indexApi.removeLikeCard(cardId).then((res) => {
+      card.renderLikes(res)
+    }).catch((err) => alert(err))
+  },
+
+  handleDeleteCard: (cardID, cardElement) => {
     popupCardDelete.open(cardID, cardElement);
   }
 
@@ -67,7 +73,7 @@ const popupFormProfile = new PopupWithForm('.popup_edit_profile', {
     .then((res) => {
       profileInfo.setUserInfo(res);
       popupFormProfile.close();
-    })
+    }).catch((err) => alert(err))
   }
 })
 
@@ -83,7 +89,7 @@ const popupFormAddCards = new PopupWithForm('.popup_add_photo', {
     .then((newCard) => {
       cardSection.addItem(createCard(newCard, currentUserId));
       popupFormAddCards.close();
-    })
+    }).catch((err) => alert(err))
   }
 })
 
@@ -92,13 +98,13 @@ buttonAddOpen.addEventListener('click', () => {
   validationForm['form-photo'].resetValidation();
 });
 
-const popupAvatarForm = new PopupWithForm('.popup_type_avatar', {
+const popupAvatarForm = new PopupWithForm('.popup_edit_avatar', {
   submitCallback: (data) => {
     indexApi.patchAvatar(data)
     .then((resUser) => {
       profileInfo.patchAvatar(resUser);
       popupAvatarForm.close();
-    })
+    }).catch((err) => alert(err))
   }
 })
 
@@ -107,13 +113,13 @@ popupAvatar.addEventListener('click', () => {
   validationForm['form-avatar'].resetValidation();
 })
 
-const popupCardDelete = new PopupWithDelete('.popup_type_delete', {
+const popupCardDelete = new PopupWithDelete('.popup_delete_photo', {
   submitCallback: (id, card) => {
     indexApi.deleteCard(id)
     .then(() => {
       card.deleteCard();
       popupCardDelete.close();
-    })
+    }).catch((err) => alert(err))
   }
 })
 
