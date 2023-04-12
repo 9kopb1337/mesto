@@ -12,20 +12,21 @@ export class FormValidator {
   }
 
   _showInputError(inputElement) {
-    this._errorElement = this._form.querySelector(
+    const errorElement = this._form.querySelector(
       `.${inputElement.id}-error`
     );
+    errorElement.textContent = inputElement.validationMessage;
+    inputElement.classList.add(this._inputErrorClass);
     inputElement.classList.add(this._error);
-    this._errorElement.textContent = inputElement.validationMessage;
-    this._errorElement.classList.add(this._error);
   }
 
   _hideInputError(inputElement) {
-    this._errorElement = this._form.querySelector(
+    const errorElement = this._form.querySelector(
       `.${inputElement.id}-error`
     );
+    inputElement.classList.remove(this._inputErrorClass);
     inputElement.classList.remove(this._error);
-    this._errorElement.textContent = "";
+    errorElement.textContent = "";
   }
 
   _checkInputValidity(inputElement) {
@@ -52,10 +53,10 @@ export class FormValidator {
 
   _setEventListeners() {
     this._toggleButtonState();
-    this._inputList.forEach((input) => {
-      input.addEventListener("input", () => {
+    this._inputList.forEach((inputElement) => {
+      inputElement.addEventListener("input", () => {
         this._toggleButtonState();
-        this._checkInputValidity(input);
+        this._checkInputValidity(inputElement);
       });
     });
   }

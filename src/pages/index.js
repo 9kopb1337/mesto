@@ -102,7 +102,7 @@ const popupAvatarForm = new PopupWithForm('.popup_edit_avatar', {
   submitCallback: (data) => {
     indexApi.patchAvatar(data)
     .then((resUser) => {
-      profileInfo.patchAvatar(resUser);
+      profileInfo.setUserAvatar(resUser);
       popupAvatarForm.close();
     })
   }
