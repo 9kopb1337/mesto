@@ -1,10 +1,10 @@
 import Popup from "./Popup.js";
 
 export class PopupWithForm extends Popup {
-  constructor(selectorPopup, { submitCallback }) {
+  constructor(selectorPopup, { submitCallback, submitCallbackText }) {
     super(selectorPopup);
     this._submitCallback = (...args) => {
-      this.renderLoading(true);
+      this.renderLoading(true, submitCallbackText);
       submitCallback(...args).finally(() => this.renderLoading(false));
     };
     this._formSubmit = this._popup.querySelector(".popup__form");
