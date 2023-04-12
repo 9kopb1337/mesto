@@ -17,111 +17,127 @@ let currentUserId;
 const indexApi = new Api(apiRes);
 
 Promise.all([indexApi.getProfileInfo(), indexApi.getCards()])
-.then(([resUser, resCard]) => {
-  currentUserId = resUser._id;
-  profileInfo.setUserInfo(resUser);
-  profileInfo.setUserAvatar(resUser);
-  cardSection.renderContent(resCard, currentUserId)
-})
+  .then(([resUser, resCard]) => {
+    currentUserId = resUser._id;
+    profileInfo.setUserInfo(resUser);
+    profileInfo.setUserAvatar(resUser);
+    cardSection.renderContent(resCard, currentUserId);
+  })
+  .catch((err) => console.log(err));
 
-const photoCardPopup = new PopupWithImage('.popup_type_photo');
+const photoCardPopup = new PopupWithImage(".popup_type_photo");
 
 const createCard = (data, user) => {
-  const card = new Card({data: data, userId: user, templateSelector: '.elements-template',
+  const card = new Card({
+    data: data,
+    userId: user,
+    templateSelector: ".elements-template",
 
-  handleCardClick: () => {
-    photoCardPopup.open(data);
-  },
+    handleCardClick: () => {
+      photoCardPopup.open(data);
+    },
 
-  handleLikeCard: (cardId) => {
-    indexApi.likeCard(cardId)
-    .then((res) => {
-      card.renderLikes(res);
-    })
-  },
+    handleLikeCard: (cardId) => {
+      indexApi
+        .likeCard(cardId)
+        .then((res) => {
+          card.renderLikes(res);
+        })
+        .catch((err) => console.log(err));
+    },
 
-  handleRemoveCardLike: (cardId) => {
-    indexApi.removeLikeCard(cardId).then((res) => {
-      card.renderLikes(res)
-    })
-  },
+    handleRemoveCardLike: (cardId) => {
+      indexApi
+        .removeLikeCard(cardId)
+        .then((res) => {
+          card.renderLikes(res);
+        })
+        .catch((err) => console.log(err));
+    },
 
-  handleDeleteCard: (cardID) => {
-    popupCardDelete.open(cardID);
-  }
-
+    handleDeleteCard: (cardID, cardElement) => {
+      popupCardDelete.openWarning(cardID, cardElement);
+    },
   });
 
   return card.generateCard();
-}
+};
 
-const cardSection = new Section({
-  renderer: (item, userId) => {
-    cardSection.addItem(createCard(item, userId));
-  }
-}, '.elements');
+const cardSection = new Section(
+  {
+    renderer: (item, userId) => {
+      cardSection.addItem(createCard(item, userId));
+    },
+  },
+  ".elements"
+);
 
 const profileInfo = new UserInfo({
-  selectorUserName: '.profile__name',
-  selectorUserDescription: '.profile__description',
-  selectorUserAvatar: '.profile__photo'
+  selectorUserName: ".profile__name",
+  selectorUserDescription: ".profile__description",
+  selectorUserAvatar: ".profile__photo",
 });
 
-const popupFormProfile = new PopupWithForm('.popup_edit_profile', {
-  submitCallback: (data) => {
-    indexApi.patchProfileInfo(data)
-    .then((res) => {
-      profileInfo.setUserInfo(res);
-      popupFormProfile.close();
-    })
-  }
-})
+const popupFormProfile = new PopupWithForm(".popup_edit_profile", {
+  submitCallback: (data) =>
+    indexApi
+      .patchProfileInfo(data)
+      .then((res) => {
+        profileInfo.setUserInfo(res);
+        popupFormProfile.close();
+      })
+      .catch((err) => console.log(err)),
+});
 
-buttonEditOpen.addEventListener('click', () => {
+buttonEditOpen.addEventListener("click", () => {
   popupFormProfile.open();
   popupFormProfile.setInputValues(profileInfo.getUserInfo());
-  validationForm['form-profile'].resetValidation();
-})
-
-const popupFormAddCards = new PopupWithForm('.popup_add_photo', {
-  submitCallback: (data) => {
-    indexApi.postNewCard(data)
-    .then((newCard) => {
-      cardSection.addItem(createCard(newCard, currentUserId));
-      popupFormAddCards.close();
-    })
-  }
-})
-
-buttonAddOpen.addEventListener('click', () => {
-  popupFormAddCards.open();
-  validationForm['form-photo'].resetValidation();
+  validationForm["form-profile"].resetValidation();
 });
 
-const popupAvatarForm = new PopupWithForm('.popup_edit_avatar', {
-  submitCallback: (data) => {
-    indexApi.patchAvatar(data)
-    .then((resUser) => {
-      profileInfo.setUserAvatar(resUser);
-      popupAvatarForm.close();
-    })
-  }
-})
+const popupFormAddCards = new PopupWithForm(".popup_add_photo", {
+  submitCallback: (data) =>
+    indexApi
+      .postNewCard(data)
+      .then((newCard) => {
+        cardSection.addItem(createCard(newCard, currentUserId));
+        popupFormAddCards.close();
+      })
+      .catch((err) => console.log(err)),
+});
 
-popupAvatar.addEventListener('click', () => {
+buttonAddOpen.addEventListener("click", () => {
+  popupFormAddCards.open();
+  validationForm["form-photo"].resetValidation();
+});
+
+const popupAvatarForm = new PopupWithForm(".popup_edit_avatar", {
+  submitCallback: (data) =>
+    indexApi
+      .patchAvatar(data)
+      .then((resUser) => {
+        profileInfo.setUserAvatar(resUser);
+        popupAvatarForm.close();
+      })
+      .catch((err) => console.log(err)),
+});
+
+popupAvatar.addEventListener("click", () => {
   popupAvatarForm.open();
-  validationForm['form-avatar'].resetValidation();
-})
+  validationForm["form-avatar"].resetValidation();
+});
 
-const popupCardDelete = new PopupWithDelete('.popup_delete_photo', {
-  submitCallback: (cardID) => {
-    indexApi.deleteCard(cardID)
-    .then(() => {
-      cardID.deleteCard();
-      popupCardDelete.close();
-    })
-  }
-})
+const popupCardDelete = new PopupWithDelete(".popup_delete_photo", {
+  submitCallback: (id, card) => {
+    indexApi
+      .deleteCardApi(id)
+      .then(() => {
+        card.deleteCard();
+        popupCardDelete.close();
+      })
+      .catch((err) => console.log(err));
+  },
+});
 
 photoCardPopup.setEventListeners();
 popupFormProfile.setEventListeners();
@@ -131,13 +147,13 @@ popupCardDelete.setEventListeners();
 
 const validationForm = {};
 const enableValidation = (data) => {
-  const listForm = Array.from(document.querySelectorAll(data.formSelector))
+  const listForm = Array.from(document.querySelectorAll(data.formSelector));
   listForm.forEach((formElement) => {
     const formValidator = new FormValidator(data, formElement);
-    const formName = formElement.getAttribute('name');
+    const formName = formElement.getAttribute("name");
 
     validationForm[formName] = formValidator;
     formValidator.enableValidation();
-  })
-}
+  });
+};
 enableValidation(formValidation);
