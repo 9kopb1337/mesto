@@ -1,4 +1,4 @@
-import { config, apiRes } from "../utils/constants.js";
+import { formValidation, apiRes } from "../utils/constants.js";
 import { Api } from "../components/Api.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -46,8 +46,8 @@ const createCard = (data, user) => {
     })
   },
 
-  handleDeleteCard: (cardID, cardElement) => {
-    popupCardDelete.open(cardID, cardElement);
+  handleDeleteCard: (cardID) => {
+    popupCardDelete.open(cardID);
   }
 
   });
@@ -114,10 +114,10 @@ popupAvatar.addEventListener('click', () => {
 })
 
 const popupCardDelete = new PopupWithDelete('.popup_delete_photo', {
-  submitCallback: (id, card) => {
-    indexApi.deleteCard(id)
+  submitCallback: (cardID) => {
+    indexApi.deleteCard(cardID)
     .then(() => {
-      card.deleteCard();
+      cardID.deleteCard();
       popupCardDelete.close();
     })
   }
@@ -140,4 +140,4 @@ const enableValidation = (data) => {
     formValidator.enableValidation();
   })
 }
-enableValidation(config);
+enableValidation(formValidation);
