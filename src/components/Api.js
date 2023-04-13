@@ -17,9 +17,7 @@ export class Api {
       headers: {
         authorization: this._authorization,
       },
-    })
-      .then((res) => this._checkRes(res))
-      .catch((err) => console.log(err));
+    }).then((res) => this._checkRes(res));
   }
 
   getCards() {
@@ -27,21 +25,18 @@ export class Api {
       headers: {
         authorization: this._authorization,
       },
-    })
-      .then((res) => this._checkRes(res))
-      .catch((err) => console.log(err));
+    }).then((res) => this._checkRes(res));
   }
 
-  patchProfileInfo({name, about}) {
+  patchProfileInfo({ name, about }) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name, about
+        name,
+        about,
       }),
-    })
-      .then((res) => this._checkRes(res))
-      .catch((err) => console.log(err));
+    }).then((res) => this._checkRes(res));
   }
 
   patchAvatar(data) {
@@ -51,9 +46,7 @@ export class Api {
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-    })
-      .then((res) => this._checkRes(res))
-      .catch((err) => console.log(err));
+    }).then((res) => this._checkRes(res));
   }
 
   postNewCard(data) {
@@ -64,35 +57,27 @@ export class Api {
         name: data.name,
         link: data.link,
       }),
-    })
-      .then((res) => this._checkRes(res))
-      .catch((err) => console.log(err));
+    }).then((res) => this._checkRes(res));
   }
 
   deleteCardApi(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => this._checkRes(res))
-      .catch((err) => console.log(err));
+    }).then((res) => this._checkRes(res));
   }
 
   likeCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
-    })
-      .then((res) => this._checkRes(res))
-      .catch((err) => console.log(err));
+    }).then((res) => this._checkRes(res));
   }
 
   removeLikeCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => this._checkRes(res))
-      .catch((err) => console.log(err));
+    }).then((res) => this._checkRes(res));
   }
 }
